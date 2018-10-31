@@ -1,0 +1,10 @@
+
+\.idea/
+
+next202/__pycache__/
+
+publishing/__pycache__/
+
+publishing/migrations/__pycache__/
+
+publishing/migrations/

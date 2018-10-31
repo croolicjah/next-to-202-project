@@ -1,0 +1,29 @@
+{% load static %}
+<html lang="pl">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodaj zdjęcie</title>
+
+
+
+</head>
+<body>
+
+    <form enctype='multipart/form-data' action="{{ action }}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class='for' type="submit" value="ok">
+    </form>
+
+    {% for photo in photos %}
+        <div class="pull-left">
+          <a href="/static/media/{{ photo.id }}"><img class="imgs-view " src="{% static photo.photo.url %}"></a>
+        </div>
+    {% empty %}
+        <p>brak zdjęć</p>
+    {% endfor %}
+
+</body>
+</html>

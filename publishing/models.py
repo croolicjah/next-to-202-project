@@ -31,8 +31,12 @@ class Photo(models.Model):
     # likes = models.ManyToManyField(MyUser)
 
 
+class Video(models.Model):
+    video = models.FileField()
+    source = models.CharField(max_length=20, blank=True, null=True)
+
 class Article(models.Model):
-    author = models.ForeignKey('auth.User', blank=True, on_delete=models.CASCADE)
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     # lead = models.TextField(max_length=765, null=True)
     # text = models.TextField(blank=True, null=True)

@@ -8,3 +8,9 @@ publishing/__pycache__/
 publishing/migrations/__pycache__/
 
 publishing/migrations/
+
+news/__pycache__/
+
+news/migrations/__pycache__/
+
+news/migrations/

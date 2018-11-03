@@ -75,13 +75,17 @@ h1, h2, h3, h4, h5, h6, figure {
 
 @media screen and (max-width: 768px) {
   .colorlib-nav {
+
     margin: 0; } }
 
 .colorlib-nav .top-menu {
-  padding: 25px 30px; }
-  @media screen and (max-width: 768px) {
-    .colorlib-nav .top-menu {
-      padding: 28px 1em; } }
+  padding: 25px 30px;
+
+}
+
+@media screen and (max-width: 768px) {
+  .colorlib-nav .top-menu {
+    padding: 28px 1em;} }
 
 .colorlib-nav #colorlib-logo {
   font-size: 40px;
@@ -89,9 +93,10 @@ h1, h2, h3, h4, h5, h6, figure {
   padding: 0;
   font-family: "Grand Hotel", cursive;
   line-height: 40px; }
-  .colorlib-nav #colorlib-logo a {
-    position: relative;
-    color: #000; }
+
+.colorlib-nav #colorlib-logo a {
+  position: relative;
+  color: #000; }
 
 @media screen and (max-width: 768px) {
   .colorlib-nav .menu-1 {

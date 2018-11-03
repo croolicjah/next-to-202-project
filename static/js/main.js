@@ -271,7 +271,7 @@
 		dropdown();
 		goToTop();
 		loaderPage();
-		owlCrouselFeatureSlide();x
+		owlCrouselFeatureSlide();
 	});
 
 

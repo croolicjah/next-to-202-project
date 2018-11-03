@@ -2,23 +2,37 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils import timezone
 from django.views import View
+
+from news.views import NewsList
 from .models import Photo, Article
 from .forms import AddPhotoForm
 
 
 # Create your views here.
-class ArticleList(View):
+class MainPage(View):
 
     def get(self, request):
-        posts = Article.objects.filter(publish_date__lte=timezone.now()).order_by('publish_date')
+
+        # prepare middle column with articles list
+        posts = Article.objects.filter(publish_date__lte=timezone.now()).order_by('-publish_date')
+
+        __snippets = NewsList.fetch_news('https://kurierkolejowy.eu', '/wiadomosci')
         # print(posts.values())
         #post = Article.objects.get(pk=1)
         # main_media = Photo.objects.get(pk=1)
 
+        #prepare left column
+
+
+        #prepare right column
+
+
+        #add app
 
 
         ctx = {
             # 'photo': main_media,
+            'snippets' : __snippets,
             'posts': posts
         }
         return render(request, 'index.html', ctx)

@@ -14,6 +14,15 @@
     <form enctype='multipart/form-data' action="{{ action }}" method="post">
         {% csrf_token %}
         {{ form.as_p }}
+        <div id="editor">I tu mamy coś</div>
+        <script src="https://cdn.ckeditor.com/ckeditor5/11.1.1/inline/ckeditor.js"></script>
+            <script>
+        InlineEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
         <input class='for' type="submit" value="ok">
     </form>
 

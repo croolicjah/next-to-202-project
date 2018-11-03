@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Article, Photo
+from .models import Article, Photo, Video
 # Register your models here.
 # admin.site.register(Article)
 # admin.site.register(Photo)
@@ -17,7 +17,7 @@ class ArticleAdmin(admin.ModelAdmin):
         obj.save()
 
         for afile in request.FILES.getlist('photos_multiple'):
-            obj.photo.create(article=afile)
+            obj.photos.create(article=afile)
 
 
 admin.site.register(Article, ArticleAdmin)

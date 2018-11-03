@@ -1,0 +1,18 @@
+{% load static %}
+
+    <div class="side-wrap">
+        <h2 class="sidebar-heading">Recent Post</h2>
+
+        {% for snippet in snippets %}
+            <div class="f-entry">
+                <a href="{{snippet.2}}" class="featured-img" style="background-image: url({{snippet.3}});"></a>
+
+                <div class="desc">
+                    <span><i class="icon-calendar3"></i> {{ snippet.0|date }} | {{snippet.0|time}}</span>
+                    <h3><a href="{{snippet.2}}" target="_blank"> {{ snippet.1}} </a></h3>
+                </div>
+            </div>
+
+        {% endfor %}
+
+    </div>

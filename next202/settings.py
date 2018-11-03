@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'publishing.apps.PublishingConfig',
     'ckeditor',
+    'news',
+
 
 ]
 
@@ -67,6 +69,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+
         },
     },
 ]
@@ -119,10 +122,11 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+# GDAL_LIBRARY_PATH = '/home/revorete/workspace/lib/python3.7/site-packages/django/contrib/gis/gdal/'
 
 CKEDITOR_CONFIGS = {
     'default': {
-
+        'toolbar': 'full-all',
         'height': 300,
         'autoGrow_maxHeight': 600,
     },

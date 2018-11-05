@@ -28,7 +28,10 @@ $(document).ready(function() {
 
 	var linkMagnifPopup = function() {
 		$('.image-popup-link').magnificPopup({
-		  type: 'image'
+		    type: 'image',
+			gallery:{
+				enabled:true,
+			},
 		});
 	};
 

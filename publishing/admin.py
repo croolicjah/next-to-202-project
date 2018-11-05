@@ -9,15 +9,14 @@ class PhotoInline(admin.StackedInline):
     model = Photo
     extra = 1
 
-
+@admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
+
     inlines = [PhotoInline]
 
     def save_model(self, request, obj, form, change):
         obj.save()
 
         for afile in request.FILES.getlist('photos_multiple'):
-            obj.photos.create(article=afile)
 
-
-admin.site.register(Article, ArticleAdmin)
+            obj.photo_set.create(article=afile)

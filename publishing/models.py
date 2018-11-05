@@ -15,7 +15,7 @@ PRODUCTION_STATUS = (
 
 class Category(models.Model):
     name = models.CharField(max_length=64)
-    description = models.TextField(null=True)
+    article = models.ForeignKey('Article', on_delete=models.CASCADE, blank=True, null=True, related_name='category_article')
 
 
 class Photo(models.Model):
@@ -103,3 +103,12 @@ class Comment(models.Model):
 #
 #     def __str__(self):
 #         return "{}, {}".format(self.title, self.author)
+
+POSITIONS = {
+    1: 'header',
+    2: 'bottom_header_ad',
+    3: 'top_ad',
+    4: '',
+}
+
+# class Layout(models.Model)

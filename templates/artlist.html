@@ -2,14 +2,16 @@
 
 <div class="col-md-6 col-md-push-3">
     <div class="wrap">
+        {#  przygotowuję listę artykułów. post zawiera dane z modeli Article i Photo, a także Categories. kolekcję posts przygotowuję w widoku MainPageView    #}
+
 
         {% for post in posts %}
 
         <article class="blog-entry">
             <div class="blog-wrap">
-                <span class="category text-center"><a href="blog.html">Fashion</a> | <a href="blog.html">Lifestyle</a></span>
+                <span class="category text-center"><a href="blog.html">Fashion</a> | <a href="blog.html">To ten</a></span>
                 <h2 class="text-center"><a href="blog.html"> {{ post.title }}</a></h2>
-
+                {# jeśli artykuł ma tylko jedno zdjęcie to nie pokazuj galerii zdjęć, a tylko pierwsze zdjęcie#}
                 {% if post.photo_set.count == 1%}
                     <div class="blog-image">
                         <a href="{% static post.photo_set.first.photo.url %}" class="blog-img text-center" style="background-image: url({% static post.photo_set.first.photo.url %});"><span><i class="icon-link"></i></span></a>
@@ -21,8 +23,9 @@
                         </ul>
                     </div>
                 {% else %}
+{#                    jeśli więcej zdjęć to zrób galerię - karuzelę #}
                     <div class="blog-image">
-                        <div class="owl-carousel owl-carousel2 blog-item">
+                        <div class="owl-carousel owl-carousel2 blog-item gallery:{enabled:true}">
                          {% for photo in post.photo_set.all %}
                             <div class="item">
                                 <a href="{% static photo.photo.url %}" class="blog image-popup-link" style="background-image: url({% static photo.photo.url %});">

@@ -17,6 +17,7 @@ class MainPage(View):
         posts = Article.objects.filter(publish_date__lte=timezone.now()).order_by('-publish_date')
 
         __snippets = NewsList.fetch_news('https://kurierkolejowy.eu', '/wiadomosci')
+        # self.LayoutPrepare() -> ctx set
         # print(posts.values())
         #post = Article.objects.get(pk=1)
         # main_media = Photo.objects.get(pk=1)
@@ -41,6 +42,31 @@ class MainPage(View):
             post = Article.objects.get(pk=1)
 
             return HttpResponse("Powrót")
+
+class MapsGalleryView(View):
+    pass
+
+
+class SingleArticleView(View):
+    def get(self, request, id):
+        article = Article.objects.get(id=id)
+
+        ctx = {
+            'article' : article,
+
+        }
+
+        return render(request, 'single.html', ctx)
+
+    def post(self, request):
+        form = AddPhotoForm(request.POST, request.FILES)
+        photos = Photo.objects.all().order_by('-id')
+
+        if form.is_valid():
+            form.save()
+            return render(request, 'add_image.html', {'photos': photos})
+        else:
+            return render(request, 'add_image.html', {'form': form})
 
 
 class AddImageViewDev(View):

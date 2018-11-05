@@ -48,14 +48,16 @@ class NewsList(View):
 
     def get(self, request):
 
-        __snippets = self.fetch_news('https://kurierkolejowy.eu', '/wiadomosci')
-        print(__snippets)
-        ctx = {
-            'snippets': __snippets,
-
-        }
+        # __snippets = self.fetch_news('https://kurierkolejowy.eu', '/wiadomosci')
+        # print(__snippets)
+        # ctx = {
+        #     'snippets': __snippets,
+        #
+        # }
 
         return render(request, 'news_module.html', ctx)
+
+
 
 # class WikipediaObject(View):
 #     def get(self, request):

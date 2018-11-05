@@ -2,6 +2,12 @@
 
 <div class="col-md-3 col-md-pull-6">
     <aside class="sidebar-2">
+{#        for items in left-column#}
+{#            if item == news:#}
+{#                include news_module#}
+{#            elif item == blackquote#}
+{#                include blaquote#}
+{#            elif item ==#}
 
         {% include 'news_module.html' %}
 

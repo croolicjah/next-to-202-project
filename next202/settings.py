@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'publishing.apps.PublishingConfig',
     'ckeditor',
     'news',
-
+    'mapwidgets',
+    'rest_framework',
 
 ]
 

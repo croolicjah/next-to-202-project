@@ -14,14 +14,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from publishing.views import MainPage, AddImageViewDev, SingleArticleView
 from django.conf import settings
 from django.conf.urls.static import static
 from news.views import NewsList
+from filebrowser.sites import site
+
 
 
 urlpatterns = [
+    path('admin/filebrowser/', site.urls),
+
+    path('jet/', include('jet.urls')),  #('grappelli/', include('grappelli.urls')),
+    path('jet/dashboard/', include('jet.dashboard.urls')),
     path('admin/', admin.site.urls),
     path('', MainPage.as_view(), name='article-list'),
     path('news/', NewsList.as_view(), name='news'),

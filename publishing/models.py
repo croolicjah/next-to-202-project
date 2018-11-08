@@ -13,9 +13,16 @@ PRODUCTION_STATUS = (
 )
 
 
+
 class Category(models.Model):
     name = models.CharField(max_length=64)
-    article = models.ForeignKey('Article', on_delete=models.CASCADE, blank=True, null=True, related_name='category_article')
+    number = models.IntegerField(null=True)
+    visible = models.BooleanField(null=True, blank=True, name="visible")
+    parent_id   = models.IntegerField(null=True)
+    # models.ManyToManyField('Article', related_name='category_article')
+
+    def __str__(self):
+        return self.name
 
 
 class Photo(models.Model):
@@ -45,12 +52,20 @@ class Article(models.Model):
     create_date = models.DateTimeField(auto_now_add=True)
     publish_date = models.DateTimeField(blank=True, null=True)
     update_date = models.DateTimeField(blank=True, null=True)
-
+    active = models.BooleanField(default=False, blank=True, name="active")
+    categories = models.ManyToManyField('Category', related_name='categories')
     #main_multimedia2 = FilerFileField(related_name='zdjecia')
 
     status = models.IntegerField(choices=PRODUCTION_STATUS, default=1)
 
+    def spice(self):
+        return ",".join([str(p) for p in self.categories.filter(parent_id=200)])
 
+    # def get_visibility(self):
+    #     return ",".join([str(p) for p in self.categories.filter(visible__isnull=False)])
+
+    spice.short_description = 'type'
+    # spice.admin_order_field = 'categories'
     def publish(self):
         self.publish_date = timezone.now()
         # self.update_date = self.publish_date
@@ -61,13 +76,11 @@ class Article(models.Model):
         self.update_date = timezone.now()
         self.save()
 
-
-
     def __str__(self):
         return self.title
 
 
-# class Snippet(models):
+# class Snippet(models.Models):
 #     start_emission = models.DateField(null=True)
 #     stop_emission = models.DateField(null=True)
 #
@@ -86,8 +99,9 @@ class Article(models.Model):
 
 
 class Comment(models.Model):
-    content = models.TextField()
-    photo = models.ForeignKey(Photo, on_delete=models.CASCADE)
+    signalist = models.CharField(max_length=32, null=True)
+    content = models.TextField(null=True)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, null=True)
 
 
 

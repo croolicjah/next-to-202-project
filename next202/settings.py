@@ -26,11 +26,46 @@ SECRET_KEY = '!iy(#4sy73s4wu*-4#86fp5e5d9b7#r&_76qrszs^80&$xw501'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
-
+# JET_INDEX_DASHBOARD = 'jet.dashboard.dashboard.DefaultIndexDashboard'
+# JET_APP_INDEX_DASHBOARD = 'jet.dashboard.dashboard.DefaultAppIndexDashboard'
+JET_DEFAULT_THEME = 'light-gray'
+JET_THEMES = [
+    {
+        'theme': 'default', # theme folder name
+        'color': '#47bac1', # color of the theme's button in user menu
+        'title': 'Default' # theme title
+    },
+    {
+        'theme': 'green',
+        'color': '#44b78b',
+        'title': 'Green'
+    },
+    {
+        'theme': 'light-green',
+        'color': '#2faa60',
+        'title': 'Light Green'
+    },
+    {
+        'theme': 'light-violet',
+        'color': '#a464c4',
+        'title': 'Light Violet'
+    },
+    {
+        'theme': 'light-blue',
+        'color': '#5EADDE',
+        'title': 'Light Blue'
+    },
+    {
+        'theme': 'light-gray',
+        'color': '#222',
+        'title': 'Light Gray'
+    }
+]
 # Application definition
 
 INSTALLED_APPS = [
+    # 'jet.dashboard',
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +77,9 @@ INSTALLED_APPS = [
     'news',
     'mapwidgets',
     'rest_framework',
+    'bootstrap4',
+    'filebrowser',
+    'embed_video',
 
 ]
 
@@ -69,6 +107,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
             ],
 
         },
@@ -127,9 +166,9 @@ USE_TZ = True
 
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': 'full-all',
+        'toolbar': 'full',
         'height': 300,
-        'autoGrow_maxHeight': 600,
+        'autoGrow_maxHeight': 1200,
     },
     'lead': {
         'toolbar': 'Custom',

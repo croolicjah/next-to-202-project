@@ -10,11 +10,11 @@
         <article class="blog-entry">
             <div class="blog-wrap">
                 <span class="category text-center"><a href="blog.html">Fashion</a> | <a href="blog.html">To ten</a></span>
-                <h2 class="text-center"><a href="blog.html"> {{ post.title }}</a></h2>
+                <h2 class="text-center"><a href="blog.html"> {{ post.artlist.title }}</a></h2>
                 {# jeśli artykuł ma tylko jedno zdjęcie to nie pokazuj galerii zdjęć, a tylko pierwsze zdjęcie#}
-                {% if post.photo_set.count == 1%}
+                {% if post.artlist.photo_set.count == 1 %}
                     <div class="blog-image">
-                        <a href="{% static post.photo_set.first.photo.url %}" class="blog-img text-center" style="background-image: url({% static post.photo_set.first.photo.url %});"><span><i class="icon-link"></i></span></a>
+                        <a href="{% static post.artlist.photo_set.first.photo.url %}" class="blog-img text-center" style="background-image: url({% static post.artlist.photo_set.first.photo.url %});"><span><i class="icon-link"></i></span></a>
                         <ul class="share">
                             <li class="text-vertical"><i class="icon-share3"></i></li>
                             <li><a href="#"><i class="icon-facebook"></i></a></li>
@@ -26,7 +26,7 @@
 {#                    jeśli więcej zdjęć to zrób galerię - karuzelę #}
                     <div class="blog-image">
                         <div class="owl-carousel owl-carousel2 blog-item gallery:{enabled:true}">
-                         {% for photo in post.photo_set.all %}
+                         {% for photo in post.artlist.photo_set.all %}
                             <div class="item">
                                 <a href="{% static photo.photo.url %}" class="blog image-popup-link" style="background-image: url({% static photo.photo.url %});">
                                 </a>
@@ -42,11 +42,11 @@
                     </div>
                 {% endif %}
 
-                <span class="category text-center"><a href="blog.html"><i class="icon-calendar3"></i>{{ post.publish_date }}</a> | <a href="blog.html" class="posted-by"><i class="icon-user2"></i> {{ post.author }}</a> | <a href="blog.html"><i class="icon-bubble3"></i> 5 Comments</a></span>
+                <span class="category text-center"><a href="blog.html"><i class="icon-calendar3"></i>{{ post.artlist.publish_date }}</a> | <a href="blog.html" class="posted-by"><i class="icon-user2"></i> {{ post.artlist.author }}</a> | <a href="blog.html"><i class="icon-bubble3"></i> 5 Comments</a></span>
             </div>
             <div class="desc">
 
-                <p id="editor" class="first-letra">{{ post.lead|safe }}</p>
+                <p id="editor" class="first-letra">{{ post.artlist.lead|safe }}</p>
 
             </div>
             <p class="text-center"><a href="blog.html" class="btn btn-primary btn-custom">Continue Reading</a></p>

@@ -5,6 +5,7 @@ from django.views import View
 
 from news.views import NewsList
 from .models import Photo, Article
+from manage.models import ArtList
 from .forms import AddPhotoForm
 
 
@@ -14,7 +15,10 @@ class MainPage(View):
     def get(self, request):
 
         # prepare middle column with articles list
-        posts = Article.objects.filter(publish_date__lte=timezone.now()).order_by('-publish_date')
+
+        posts = ArtList.objects.order_by('positions_id')
+        print(posts)
+        # posts = Article.objects.filter(publish_date__lte=timezone.now() and ).order_by('-publish_date')
 
         __snippets = NewsList.fetch_news('https://kurierkolejowy.eu', '/wiadomosci')
         # self.LayoutPrepare() -> ctx set

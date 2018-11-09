@@ -26,8 +26,8 @@ SECRET_KEY = '!iy(#4sy73s4wu*-4#86fp5e5d9b7#r&_76qrszs^80&$xw501'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-# JET_INDEX_DASHBOARD = 'jet.dashboard.dashboard.DefaultIndexDashboard'
-# JET_APP_INDEX_DASHBOARD = 'jet.dashboard.dashboard.DefaultAppIndexDashboard'
+JET_INDEX_DASHBOARD = 'jet.dashboard.dashboard.DefaultIndexDashboard'
+JET_APP_INDEX_DASHBOARD = 'jet.dashboard.dashboard.DefaultAppIndexDashboard'
 JET_DEFAULT_THEME = 'light-gray'
 JET_THEMES = [
     {
@@ -74,12 +74,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'publishing.apps.PublishingConfig',
     'ckeditor',
+    'ckeditor_uploader',
     'news',
     'mapwidgets',
     'rest_framework',
     'bootstrap4',
     'filebrowser',
     'embed_video',
+    'manage'
 
 ]
 
@@ -123,7 +125,7 @@ WSGI_APPLICATION = 'next202.wsgi.application'
 DATABASES = {
     'default': {
         'HOST': '127.0.0.1',
-        'NAME': 'workshop5',
+        'NAME': 'lk202_2018',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'USER': 'postgres',
         'PASSWORD': 'coderslab',
@@ -164,9 +166,13 @@ USE_L10N = True
 USE_TZ = True
 # GDAL_LIBRARY_PATH = '/home/revorete/workspace/lib/python3.7/site-packages/django/contrib/gis/gdal/'
 
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': 'full',
+        'skin': 'moono',
+       # 'toolbar': 'standard',
         'height': 300,
         'autoGrow_maxHeight': 1200,
     },
@@ -176,11 +182,48 @@ CKEDITOR_CONFIGS = {
             ['Bold', 'Italic', 'Underline'],
             ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
             ['Link', 'Unlink'],
-            ['RemoveFormat']
+
+            ['RemoveFormat', 'EmbedSemantic']
         ],
         'height': 80,
         'autoParagraph': False,
-    }
+
+    },
+
+    'simple_toolbar': {
+        'skin': 'moono',
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Mode', 'Document', 'Doctools'] ,
+            [ 'Redo', 'Undo' ],
+            [ 'Find', 'Selection', 'Spellchecker', 'Editing' ] ,
+
+            [ 'Embed', 'Image', 'Magicline' ] ,
+            [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] ,
+            ['links' ] ,
+            [ 'insert' ] ,
+            [ 'styles' , 'colors' , 'tools' ,'others'  ,'about' ],
+	    ],
+
+        'width': 640,
+        'height': 150,
+
+    },
+
+    'removePlugins': 'stylesheetparser',
+    'extraPlugins': ','.join([
+
+        'autolink',
+        'autoembed',
+        'embed',
+        'autogrow',
+        'image',
+        'uploadwidget',
+        'devtools',
+        'magicline'
+
+    ]),
+
 }
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
@@ -189,3 +232,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'publishing/static/media')
+TEXT_CKEDITOR_BASE_PATH = os.path.join(STATIC_URL, 'ckeditor/ckeditor/')

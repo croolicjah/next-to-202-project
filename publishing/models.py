@@ -4,6 +4,9 @@ from ckeditor.fields import RichTextField
 from ckeditor.widgets import CKEditorWidget
 # from filer.fields.file import FilerFileField
 # from filer.fields.image import FilerImageField
+from django.utils.safestring import mark_safe
+from embed_video.fields import EmbedVideoField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 PRODUCTION_STATUS = (
     (1, "w trakcie"),
@@ -11,6 +14,8 @@ PRODUCTION_STATUS = (
     (3, "gotowy do publikacji"),
     (4, "opublikowany")
 )
+
+
 
 
 
@@ -26,11 +31,21 @@ class Category(models.Model):
 
 
 class Photo(models.Model):
-    photo = models.ImageField(max_length=255)
-    caption = models.CharField(max_length=255, blank=True, null=True)
+    photo = models.ImageField(max_length=255, name="photo")
+    caption = RichTextField(config_name='simple_toolbar', max_length=255, blank=True, null=True)
     author = models.CharField(max_length=64, blank=True, null=True)
     source = models.CharField(max_length=20, blank=True, null=True)
     article = models.ForeignKey('Article', on_delete=models.CASCADE, blank=True, null=True)
+
+    def image_tag(self):
+        return mark_safe('<img src="/media/%s" width="640" />' % (self.photo))
+
+    image_tag.short_description = 'Image'
+
+    # def image_thumb(self):
+    #     return mark_safe('<img src="/media/%s" width="100" height="100" />') % (self.photo)
+    #
+    # image_thumb.allow_tags = True
 
     def __str__(self):
         return str(self.photo)
@@ -39,8 +54,10 @@ class Photo(models.Model):
 
 
 class Video(models.Model):
-    video = models.FileField()
+    video = EmbedVideoField()
     source = models.CharField(max_length=20, blank=True, null=True)
+    article = models.ForeignKey('Article', on_delete=models.CASCADE, blank=True, null=True, name='video_article')
+
 
 class Article(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
@@ -48,7 +65,7 @@ class Article(models.Model):
     # lead = models.TextField(max_length=765, null=True)
     # text = models.TextField(blank=True, null=True)
     lead = RichTextField(config_name='lead', max_length=765, null=True)
-    text = RichTextField(blank=True, null=True)
+    text = RichTextUploadingField(blank=True, null=True)
     create_date = models.DateTimeField(auto_now_add=True)
     publish_date = models.DateTimeField(blank=True, null=True)
     update_date = models.DateTimeField(blank=True, null=True)

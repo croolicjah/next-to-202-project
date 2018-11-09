@@ -1,6 +1,8 @@
 from django.contrib import admin
+from django.forms import TextInput, Textarea
+from django.utils.html import format_html
 from jet.admin import CompactInline
-
+from django.db import models
 from .models import Article, Photo, Video, Category
 
 
@@ -12,8 +14,18 @@ from .models import Article, Photo, Video, Category
 class PhotoInline(CompactInline):
     model = Photo
     extra = 1
+    fields = ['image_tag', 'photo', 'caption', 'author', 'source']
+    #list_display = ['image_tag',]
+    readonly_fields = ['image_tag']
+    # readonly_fields = ['image_thumb']
     show_change_link = True
 
+class VideoInline(admin.StackedInline):
+    model = Video
+    extra = 1
+    fields = ['video', 'source']
+    # readonly_fields = ['image_tag']
+    show_change_link = True
 # class CategoriesInline(admin. TabularInline):
 #     model = Category.article.through
 
@@ -27,7 +39,8 @@ class ArticleAdmin(admin.ModelAdmin):
     list_display = ("title", 'spice', "author", "active", "status", "create_date", "publish_date")
     # list_filter = ["categories"]
     search_fields = ['categories', 'title']
-    inlines = [PhotoInline]
+    inlines = [PhotoInline, VideoInline]
+
     # filter_horizontal = ("article",)
     # fields = ('title', 'category_article',)
 
@@ -47,7 +60,24 @@ class ArticleAdmin(admin.ModelAdmin):
 
             obj.photo_set.create(article=afile)
 
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size': '95'})},
 
+    }
+
+    class Meta:
+        verbose_name = "Kontent"
+        verbose_name_plural = "Kontent"
+
+
+@admin.register(Video)
+class VideoAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Photo)
+class PhotoAdmin(admin.ModelAdmin):
+    pass
 
 # You may not be able to do it directly. From the documentation of list_display
 #

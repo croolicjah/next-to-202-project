@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.views import View
 
-from news.views import NewsList
+from modules.views import NewsList
 from .models import Photo, Article
 from manage.models import ArtList
 from .forms import AddPhotoForm
@@ -17,10 +17,10 @@ class MainPage(View):
         # prepare middle column with articles list
 
         posts = ArtList.objects.order_by('positions_id')
-        print(posts)
+
         # posts = Article.objects.filter(publish_date__lte=timezone.now() and ).order_by('-publish_date')
 
-        __snippets = NewsList.fetch_news('https://kurierkolejowy.eu', '/wiadomosci')
+        __snippets = NewsList.fetch_content('https://kurierkolejowy.eu', '/wiadomosci')
         # self.LayoutPrepare() -> ctx set
         # print(posts.values())
         #post = Article.objects.get(pk=1)
@@ -48,7 +48,21 @@ class MainPage(View):
             return HttpResponse("Powrót")
 
 class MapsGalleryView(View):
-    pass
+    def get(self, request):
+
+        # prepare middle column with articles list
+
+        __snippets = Photo.objects.filter(article=74)
+
+
+
+
+        ctx = {
+            # 'photo': main_media,
+            'snippets' : __snippets,
+
+        }
+        return render(request, 'maps.html', ctx)
 
 
 class SingleArticleView(View):

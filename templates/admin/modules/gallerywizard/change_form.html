@@ -1,0 +1,18 @@
+{% extends "admin/change_form.html" %}
+
+{% block inline_field_sets %}
+{% for inline_admin_formset in inline_admin_formsets %}
+    {% include inline_admin_formset.opts.template %}
+{% endfor %}
+{#    <fieldset class="module">#}
+{#      <h2>Wstaw Video</h2>#}
+{#      <input class="" name="video" type="file"  />#}
+{#    </fieldset>#}
+    <label><h2>tu wklej html</h2>
+        <textarea title="Tu wklej html" name="html1" rows="8" cols="165"></textarea>
+    </label>
+    <fieldset class="module">
+      <h2>Html2</h2>
+      <input name="html" type="text" />
+    </fieldset>
+{% endblock %}

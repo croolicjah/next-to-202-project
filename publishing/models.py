@@ -7,6 +7,9 @@ from ckeditor.widgets import CKEditorWidget
 from django.utils.safestring import mark_safe
 from embed_video.fields import EmbedVideoField
 from ckeditor_uploader.fields import RichTextUploadingField
+import requests
+import os
+
 
 PRODUCTION_STATUS = (
     (1, "w trakcie"),
@@ -38,7 +41,11 @@ class Photo(models.Model):
     article = models.ForeignKey('Article', on_delete=models.CASCADE, blank=True, null=True)
 
     def image_tag(self):
-        return mark_safe('<img src="/media/%s" width="640" />' % (self.photo))
+        if self.photo:
+            image = mark_safe('<img src="/media/%s" width="640" />' % (self.photo))
+        else:
+            image = mark_safe('<img src="/media/zaladuj.png" width="640" />')
+        return image
 
     image_tag.short_description = 'Image'
 
@@ -75,6 +82,7 @@ class Article(models.Model):
 
     status = models.IntegerField(choices=PRODUCTION_STATUS, default=1)
 
+    # metoda sprawi, że w widoku listy artykułów pojawi się typ: galerry, article...
     def spice(self):
         return ",".join([str(p) for p in self.categories.filter(parent_id=200)])
 
@@ -95,6 +103,10 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Gallery(Article):
+    pass
 
 
 # class Snippet(models.Models):

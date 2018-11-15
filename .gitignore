@@ -18,3 +18,7 @@ news/migrations/
 __pycache__/
 
 manage/migrations/
+
+*.pyc
+
+modules/migrations/

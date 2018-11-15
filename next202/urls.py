@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path, include
-from publishing.views import MainPage, AddImageViewDev, SingleArticleView
+from publishing.views import MainPage, AddImageViewDev, SingleArticleView, MapsGalleryView
 from django.conf import settings
 from django.conf.urls.static import static
-from news.views import NewsList
+from modules.views import NewsList
 from filebrowser.sites import site
 
 
@@ -26,12 +26,13 @@ from filebrowser.sites import site
 urlpatterns = [
     path('admin/filebrowser/', site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('jet/', include('jet.urls')),  #('grappelli/', include('grappelli.urls')),
-    path('jet/dashboard/', include('jet.dashboard.urls')),
+    path('jet/', include('jet.urls', 'jet')),  #('grappelli/', include('grappelli.urls')),
+    path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     path('admin/', admin.site.urls),
     path('', MainPage.as_view(), name='article-list'),
     path('news/', NewsList.as_view(), name='news'),
     path('image/', AddImageViewDev.as_view(), name="add-image'"),
+    path('maps/', MapsGalleryView.as_view(), name="maps'"),
     re_path(r'^\D-(?P<article_id>(\d)+)/$', SingleArticleView.as_view(), name="single_article"),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

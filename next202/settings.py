@@ -64,7 +64,7 @@ JET_THEMES = [
 # Application definition
 
 INSTALLED_APPS = [
-    # 'jet.dashboard',
+    'jet.dashboard',
     'jet',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -75,7 +75,7 @@ INSTALLED_APPS = [
     'publishing.apps.PublishingConfig',
     'ckeditor',
     'ckeditor_uploader',
-    'news',
+    'modules',
     'mapwidgets',
     'rest_framework',
     'bootstrap4',
@@ -171,22 +171,24 @@ CKEDITOR_IMAGE_BACKEND = 'pillow'
 CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 CKEDITOR_CONFIGS = {
     'default': {
-        'skin': 'moono',
+        #'skin': 'moonocolor',
        # 'toolbar': 'standard',
         'height': 300,
         'autoGrow_maxHeight': 1200,
     },
     'lead': {
+        #'skin': 'moonocolor',
         'toolbar': 'Custom',
         'toolbar_Custom': [
             ['Bold', 'Italic', 'Underline'],
             ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-            ['Link', 'Unlink'],
+            ['Link', 'Unlink', 'Embed',],
 
-            ['RemoveFormat', 'EmbedSemantic']
+            ['RemoveFormat', 'Preview', "Source"]
         ],
         'height': 80,
         'autoParagraph': False,
+
 
     },
 
@@ -194,35 +196,33 @@ CKEDITOR_CONFIGS = {
         'skin': 'moono',
         'toolbar': 'Custom',
         'toolbar_Custom': [
-            ['Mode', 'Document', 'Doctools'] ,
+
             [ 'Redo', 'Undo' ],
             [ 'Find', 'Selection', 'Spellchecker', 'Editing' ] ,
+            ['Link', 'Unlink', 'Embed',],
 
-            [ 'Embed', 'Image', 'Magicline' ] ,
-            [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] ,
-            ['links' ] ,
-            [ 'insert' ] ,
+
             [ 'styles' , 'colors' , 'tools' ,'others'  ,'about' ],
 	    ],
-
+        'autoParagraph': False,
         'width': 640,
         'height': 150,
+        'removePlugins': 'stylesheetparser',
+        'extraPlugins': ','.join([
 
+            'autolink',
+            'autoembed',
+            'embed',
+            'embedsemantic',
+            'autogrow',
+            'image',
+            'uploadwidget',
+            'devtools',
+
+        ]),
     },
 
-    'removePlugins': 'stylesheetparser',
-    'extraPlugins': ','.join([
 
-        'autolink',
-        'autoembed',
-        'embed',
-        'autogrow',
-        'image',
-        'uploadwidget',
-        'devtools',
-        'magicline'
-
-    ]),
 
 }
 # Static files (CSS, JavaScript, Images)

@@ -3,7 +3,7 @@ from django.forms import TextInput, Textarea
 from django.utils.html import format_html
 from jet.admin import CompactInline
 from django.db import models
-from .models import Article, Photo, Video, Category
+from .models import Article, Photo, Video, Category, Gallery
 
 
 # Register your models here.
@@ -16,7 +16,7 @@ class PhotoInline(CompactInline):
     extra = 1
     fields = ['image_tag', 'photo', 'caption', 'author', 'source']
     #list_display = ['image_tag',]
-    readonly_fields = ['image_tag']
+    readonly_fields = ['image_tag',]
     # readonly_fields = ['image_thumb']
     show_change_link = True
 
@@ -29,7 +29,10 @@ class VideoInline(admin.StackedInline):
 # class CategoriesInline(admin. TabularInline):
 #     model = Category.article.through
 
-
+@admin.register(Gallery)
+class GalleryAdmin(admin.ModelAdmin):
+    exclude = ('text',)
+    inlines = [PhotoInline]
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
@@ -37,19 +40,19 @@ class ArticleAdmin(admin.ModelAdmin):
     #     return obj..country_code.label)
 
     list_display = ("title", 'spice', "author", "active", "status", "create_date", "publish_date")
-    # list_filter = ["categories"]
-    search_fields = ['categories', 'title']
+    list_filter = ["status", "active", "author", "categories__name"]
+    search_fields = [ 'title', 'categories__name']
     inlines = [PhotoInline, VideoInline]
 
     # filter_horizontal = ("article",)
     # fields = ('title', 'category_article',)
 
     # exclude = ['article']
-    def formfield_for_manytomany(self, db_field, request, **kwargs):
-        if db_field.name == "categories":
-            kwargs["queryset"] = Category.objects.filter(number__gt=200)
-            print(kwargs["queryset"])
-        return super().formfield_for_manytomany(db_field, request, **kwargs)
+    # def formfield_for_manytomany(self, db_field, request, **kwargs):
+    #     if db_field.name == "categories":
+    #         kwargs["queryset"] = Category.objects.filter(number__gt=200)
+    #         print(kwargs["queryset"])
+    #     return super().formfield_for_manytomany(db_field, request, **kwargs)
 
     def save_model(self, request, obj, form, change):
 
@@ -58,7 +61,7 @@ class ArticleAdmin(admin.ModelAdmin):
 
         for afile in request.FILES.getlist('photos_multiple'):
 
-            obj.photo_set.create(article=afile)
+            obj.photo_set.create(photo=afile)
 
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '95'})},

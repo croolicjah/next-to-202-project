@@ -1618,3 +1618,7 @@ input[type="text"] {
 
 .js .animate-box {
   opacity: 0; }
+
+a.image-no-title {
+    title: hidden;
+ }

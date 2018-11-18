@@ -22,3 +22,5 @@ manage/migrations/
 *.pyc
 
 modules/migrations/
+
+next202/settings\.py

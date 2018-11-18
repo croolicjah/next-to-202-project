@@ -86,7 +86,7 @@ class NewsList(View):
             news = html
             soup = BeautifulSoup(news)
             all_news = soup.find_all('a')
-
+            
             for item in all_news:
 
                 snippets.append([

@@ -10,28 +10,5 @@
 				</div>
 			</div>
 		</aside>
-
-		<div id="colorlib-container">
-			<div class="container">
-				<div class="row">
-					<div class="gallery-wrap image-popup">
-
-                        {% for snippet in snippets %}
-
-                                <a href="{% static snippet.photo.url %}" class="gallery text-center" style="background-image: url({% static snippet.photo.url %});" data-title="{{ snippet.caption }}">
-
-                                 <span>
-                                     <i class="icon-search3"></i>
-                                     <div style="background-color: rgba(255, 255, 255, 0.6);"><strong >{{ snippet.caption }}</strong></div>
-                                 </span>
-
-                                <img class="mfp-hide" src="{% static snippet.photo.url %}" />
-                            </a>
-
-                        {% endfor %}
-
-					</div>
-				</div>
-			</div>
-		</div>
+		{% include 'gallery.html' %}
 {% endblock %}

@@ -59,7 +59,7 @@ class MapsGalleryView(View):
 
         ctx = {
             # 'photo': main_media,
-            'snippets' : __snippets,
+            'galleries' : __snippets,
 
         }
         return render(request, 'maps.html', ctx)

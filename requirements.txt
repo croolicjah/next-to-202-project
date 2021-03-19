@@ -36,7 +36,7 @@ django-multifilefield==1.0
 django-polymorphic==2.0.3
 django-sekizai==0.10.0
 django-treebeard==4.3
-djangorestframework==3.9.0
+djangorestframework==3.11.2
 easy-thumbnails==2.5
 entrypoints==0.2.3
 et-xmlfile==1.0.1

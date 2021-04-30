@@ -112,7 +112,7 @@ query-string==1.0.2
 queuelib==1.5.0
 request==1.0.2
 requests==2.19.1
-rsa==4.0
+rsa==4.7
 Scrapy==1.5.1
 selenium==3.141.0
 Send2Trash==1.5.0

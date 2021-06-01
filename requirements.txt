@@ -128,7 +128,7 @@ twilio==6.18.0
 Twisted==18.9.0
 Unidecode==0.4.21
 uritemplate==3.0.0
-urllib3==1.23
+urllib3==1.26.5
 w3lib==1.19.0
 wcwidth==0.1.7
 webencodings==0.5.1

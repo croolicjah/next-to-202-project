@@ -48,7 +48,7 @@ google-api-python-client==1.7.4
 google-auth==1.6.0
 google-auth-httplib2==0.0.3
 google-images-download==2.4.2
-html5lib==0.9999999
+html5lib==0.99999999
 httplib2==0.11.3
 hyperlink==18.0.0
 idna==2.7

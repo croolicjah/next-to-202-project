@@ -125,7 +125,7 @@ text-unidecode==1.2
 tornado==4.3
 traitlets==4.1.0
 twilio==6.18.0
-Twisted==18.9.0
+Twisted==22.10.0
 Unidecode==0.4.21
 uritemplate==3.0.0
 urllib3==1.23
